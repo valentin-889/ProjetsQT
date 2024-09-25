@@ -1,47 +1,50 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-MainWindow::MainWindow(): QWidget()
+
+
+/**
+ * @brief MainWindow::MainWindow Constructeur de la classe
+ * @param parent
+ */
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
-    this->compteur = 0;
-    setFixedSize(150, 100);
+    ui->setupUi(this);
 
-    monbouton = new QPushButton("bouton", this);
-    monbouton->move(10, 10);
-    monbouton2 = new QPushButton("moins", this);
-    monbouton2->move(10, 50);
-    monbouton3 = new QPushButton("zero", this);
-    monbouton3->move(10, 70) ;
-    monAffichage = new QLabel("0", this);
-    monAffichage->move(10, 50);
-
-    connect(monbouton, SIGNAL(clicked()), this, SLOT(clicBouton()));
-    connect(monbouton2, SIGNAL(clicked()), this, SLOT(clicBouton2()));
-    connect(monbouton3, SIGNAL(clicked()), this, SLOT(clicBouton3()));
-
+    this->monCompteur = 0;
 }
 
 MainWindow::~MainWindow()
 {
+    delete ui;
+}
+
+
+void MainWindow::on_btnMoins_clicked()
+{
+    this->monCompteur--;
+    ui->lblAffichage->setText(QString::number(this->monCompteur));
+    ui->lblAffichage->adjustSize();
+}
+
+
+void MainWindow::on_btnPlus_clicked()
+{
+    this->monCompteur++;
+    ui->lblAffichage->setText(QString::number(this->monCompteur));
+    ui->lblAffichage->adjustSize();
 
 }
 
-void MainWindow::clicBouton()
+void MainWindow::on_btnZero_clicked()
 {
-    this->compteur++;
-    this->monAffichage->setText(QString::number(this->compteur));
-    this->monAffichage->adjustSize();
+    ui->setupUi(this);
+    this->monCompteur = 0;
+
 }
 
-void MainWindow::clicBouton2()
+void MainWindow::on_btnQuit_clicked()
 {
-    this->compteur--;
-    this->monAffichage->setText(QString::number(this->compteur));
-    this->monAffichage->adjustSize();
-}
-
-void MainWindow::clicBouton3()
-{
-    this->compteur = 0;
-    this->monAffichage->setText(QString::number(this->compteur));
-    this->monAffichage->adjustSize();
+    this->close();
 }
