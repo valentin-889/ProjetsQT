@@ -4,28 +4,29 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+public slots:
 
+    void on_btn_chif_aes_clicked();
+    void on_btn_dechif_aes_clicked();
+    void on_btn_chif_rsa_clicked();
+    void on_btn_dechif_rsa_clicked();
+    void on_btn_sha_clicked();
+    void on_btn_clef_aes_clicked();
+    void on_btn_clef_rsa_clicked();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void on_btnMoins_clicked();
-    void on_btnPlus_clicked();
-    void on_btnZero_clicked();
-    void on_btnQuit_clicked();
-
 
 private:
     Ui::MainWindow *ui;
-
-    int monCompteur;
-
 };
 #endif // MAINWINDOW_H
